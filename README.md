@@ -6,7 +6,7 @@ A small tool to convert an audio to a video using a static background image.
 
 1.	Installation process
 
-* Just download the precompiled binary.
+* Just download the [precompiled binary](https://github.com/frazrepo/ga2v/releases).
 
 2.	Software dependencies
 
