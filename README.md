@@ -2,6 +2,10 @@
 
 A small tool to convert an audio to a video using a static background image.
 
+`
+Usage : ga2v -a audiodir/ -i bgimage.jpg -o outputdir/
+`
+
 # Getting Started
 
 1.	Installation process
@@ -16,7 +20,7 @@ A small tool to convert an audio to a video using a static background image.
 
 # Build and Test
 
-`go run ga2v.go -d assets/ -i src.jpg -o assets/mp4
+`go run ga2v.go -a assets/ -i src.jpg -o assets/mp4
 `
 # Compiling for Windows and Linux
 
