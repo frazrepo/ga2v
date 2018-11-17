@@ -24,7 +24,7 @@ Windows
 * [ffmpeg](https://www.ffmpeg.org/)
 
 
-# Build and Test
+# Build and Test from source
 
 `go run ga2v.go -a assets/ -i src.jpg -o assets/mp4
 `
