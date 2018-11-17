@@ -12,7 +12,7 @@ Usage : ga2v -a audiodir/ -i bgimage.jpg -o outputdir/
 
 Linux
 
-` $ wget https://github.com/frazrepo/ga2v/releases/download/v1.0/ga2v -O ga2v &&chmod +x ga2v`
+` $ wget https://github.com/frazrepo/ga2v/releases/download/v1.0/ga2v -O ga2v && chmod +x ga2v`
 
 
 Windows
