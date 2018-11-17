@@ -16,6 +16,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"path"
 	"path/filepath"
 	"runtime"
@@ -43,21 +44,27 @@ const (
 
 func main() {
 
+	var (
+		audio           string
+		backgroundImage string
+	)
 	log.SetLevel(log.InfoLevel)
 
-	audio := flag.String("a", "", "Audio file or directory [Required]")
-	backgroundImage := flag.String("i", "", "Background image [Required]")
+	flag.StringVar(&audio, "a", "", "Audio file or directory")
+	flag.StringVar(&backgroundImage, "i", "", "Background image")
+
+	flag.Usage = usage
 
 	flag.Parse()
 
-	if *audio == "" || *backgroundImage == "" {
+	if audio == "" || backgroundImage == "" {
 		log.Warn("Please check parameters")
 		flag.PrintDefaults()
 		os.Exit(1)
 	}
 
-	target := *audio
-	bgImage := *backgroundImage
+	target := audio
+	bgImage := backgroundImage
 
 	log.Info("Audio file or directory : ", target)
 	log.Info("Input background image : ", bgImage)
@@ -128,4 +135,27 @@ func createOutDir(in string) string {
 	}
 
 	return oPath
+}
+
+var usageStr = `
+
+██████╗  █████╗ ██████╗ ██╗   ██╗
+██╔════╝ ██╔══██╗╚════██╗██║   ██║
+██║  ███╗███████║ █████╔╝██║   ██║
+██║   ██║██╔══██║██╔═══╝ ╚██╗ ██╔╝
+╚██████╔╝██║  ██║███████╗ ╚████╔╝ 
+ ╚═════╝ ╚═╝  ╚═╝╚══════╝  ╚═══╝  
+                                  
+Usage: ga2v [options]
+Required Options:
+    -a, --audio <path>               Audio file or audio direcory
+    -i, --image <path>               Static background image
+Common Options:
+    -h, --help                       Show this message
+`
+
+// usage will print out the flag options for the server.
+func usage() {
+	fmt.Printf("%s\n", usageStr)
+	os.Exit(0)
 }
