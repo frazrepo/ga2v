@@ -6,23 +6,29 @@ A small tool to convert an audio to a video using a static background image.
 Usage : ga2v -a audiodir/ -i bgimage.jpg -o outputdir/
 `
 
-# Getting Started
+# Installation
 
-1.	Installation process
+**Installation - Precompiled binaries**
 
-* Just download the [precompiled binary](https://github.com/frazrepo/ga2v/releases).
+Linux
 
-2.	Software dependencies
+` $ wget https://github.com/frazrepo/ga2v/releases/download/v1.0/ga2v -O ga2v &&chmod +x ga2v`
 
-* ffmpeg
 
-3.	Latest releases
+Windows
+
+` $ wget https://github.com/frazrepo/ga2v/releases/download/v1.0/ga2v.exe -O ga2v.exe`
+
+**Software dependencies**
+
+* [ffmpeg](https://www.ffmpeg.org/)
+
 
 # Build and Test
 
 `go run ga2v.go -a assets/ -i src.jpg -o assets/mp4
 `
-# Compiling for Windows and Linux
+# Building binaries for Windows and Linux
 
 Windows 
 
