@@ -52,7 +52,9 @@ func main() {
 	log.SetLevel(log.InfoLevel)
 
 	flag.StringVar(&audio, "a", "", "Audio file or directory")
+	flag.StringVar(&audio, "audio", "", "Audio file or directory")
 	flag.StringVar(&backgroundImage, "i", "", "Background image")
+	flag.StringVar(&backgroundImage, "image", "", "Background image")
 
 	flag.Usage = usage
 
@@ -77,10 +79,12 @@ func main() {
 		panic(e)
 	}
 
+	//Defer Clean tmp dir
 	defer os.RemoveAll(tmpDir)
 
 	log.Info("TempDir : ", tmpDir)
 
+	//Synchronizaton
 	var wg sync.WaitGroup
 
 	if stat, err := os.Stat(target); err == nil && stat.IsDir() {

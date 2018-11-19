@@ -60,17 +60,17 @@ func waterMark(img image.Image, markText string) (image.Image, error) {
 	c.DrawImage(rect, img)
 
 	// make a fontStyle, which width is vg.Inch * 0.7
-	fontStyle, _ := vg.MakeFont("Courier", 14)
+	fontStyle, _ := vg.MakeFont("Courier", 40)
 
 	// set the color of markText
-	c.SetColor(color.RGBA{255, 255, 255, 122})
+	c.SetColor(color.RGBA{255, 255, 255, 255})
 
 	//set the lineHeight and add the markText
-	lineHeight := fontStyle.Extents().Height * 1
+	// lineHeight := fontStyle.Extents().Height * 1
 
 	// Draw the text
 	offsetx := diagonal/2 - (fontStyle.Width(markText))/2
-	offsety := (diagonal/2 - h/2) + lineHeight
+	offsety := (diagonal / 2)
 
 	c.FillString(fontStyle, vg.Point{X: offsetx, Y: offsety}, strings.ToUpper(markText))
 
