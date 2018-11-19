@@ -58,8 +58,8 @@ func main() {
 	flag.Parse()
 
 	if audio == "" || backgroundImage == "" {
-		log.Warn("Please check parameters")
-		flag.PrintDefaults()
+		fmt.Println("Please check options")
+		flag.Usage()
 		os.Exit(1)
 	}
 
