@@ -21,6 +21,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+	"sync"
 
 	"io/ioutil"
 	"os"
@@ -80,12 +81,17 @@ func main() {
 
 	log.Info("TempDir : ", tmpDir)
 
+	var wg sync.WaitGroup
+
 	if stat, err := os.Stat(target); err == nil && stat.IsDir() {
 		files, _ := ioutil.ReadDir(target)
+
+		log.Info("Files count : ", len(files))
+
 		for _, fn := range files {
 
 			//Process only mp3 files
-			ext := path.Ext(fn.Name())
+			ext := strings.ToLower(path.Ext(fn.Name()))
 			if ext != AudioExt {
 				continue
 			}
@@ -94,18 +100,30 @@ func main() {
 
 			aPath := path.Join(abs, fn.Name())
 
-			log.Info("Processing " + aPath + " ...")
-			processFile(aPath, bgImage, tmpDir)
+			wg.Add(1)
+			go func() {
+				processFile(&wg, aPath, bgImage, tmpDir)
+			}()
 		}
+
 	} else {
-		log.Info("Processing " + target + " ...")
-		processFile(target, bgImage, tmpDir)
+		wg.Add(1)
+		go func() {
+			processFile(&wg, target, bgImage, tmpDir)
+		}()
 	}
+
+	//Wait all to finish
+	wg.Wait()
 
 	log.Info("Done!")
 }
 
-func processFile(fullAudioPath string, bgImage string, tmpDir string) {
+func processFile(wg *sync.WaitGroup, fullAudioPath string, bgImage string, tmpDir string) {
+
+	defer wg.Done()
+
+	log.Info("Processing " + fullAudioPath + " ...")
 
 	title := filenameWithoutExtension(filepath.Base(fullAudioPath))
 	bgImageFileName := gimage.GenerateImageWithText(bgImage, title, tmpDir)
